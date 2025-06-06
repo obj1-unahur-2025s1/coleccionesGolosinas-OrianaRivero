@@ -1,9 +1,238 @@
-import example.pepita
+import golosinas.*
+import mariano.*
 
-describe "group of tests for pepita" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+describe "Grupo de tests de las golosinas"{
+
+  test "Test del bombón"{
+    assert.equals(bombon.precio(), 5)
+    assert.equals(bombon.peso(), 15)
+    assert.equals(bombon.gusto(), frutilla)
+    assert.that(bombon.esLibreDeGluten())
+  }
+
+  test "Test del bombón después de 2 mordiscos"{
+    bombon.recibirMordisco()
+    bombon.recibirMordisco()
+    assert.equals(bombon.peso(), 7.8)
+  }
+
+  test "Test del alfajor"{
+    assert.equals(alfajor.precio(), 12)
+    assert.equals(alfajor.peso(), 15)
+    assert.equals(alfajor.gusto(), chocolate)
+    assert.notThat(alfajor.esLibreDeGluten())
+  }
+
+  test "Test del alfajor después de 2 mordiscos"{
+    alfajor.recibirMordisco()
+    alfajor.recibirMordisco()
+    assert.equals(alfajor.peso(), 9.6)
+  }
+
+  test "Test del caramelo"{
+    assert.equals(caramelo.precio(), 12)
+    assert.equals(caramelo.peso(), 5)
+    assert.equals(caramelo.gusto(), frutilla)
+    assert.that(caramelo.esLibreDeGluten())
+  }
+
+  test "Test del caramelo después de 2 mordiscos"{
+    caramelo.recibirMordisco()
+    caramelo.recibirMordisco()
+    assert.equals(caramelo.peso(), 3)
+  }
+
+  test "Test del chupetin"{
+    assert.equals(chupetin.precio(), 2)
+    assert.equals(chupetin.peso(), 7)
+    assert.equals(chupetin.gusto(), naranja)
+    assert.that(chupetin.esLibreDeGluten())
+  }
+
+  test "Test del chupetin después de 2 mordiscos"{
+    chupetin.recibirMordisco()
+    chupetin.recibirMordisco()
+    assert.equals(chupetin.peso(), 5.67)
+  }
+
+  test "Test de la oblea"{
+    assert.equals(oblea.precio(), 5)
+    assert.equals(oblea.peso(), 250)
+    assert.equals(oblea.gusto(), vainilla)
+    assert.notThat(oblea.esLibreDeGluten())
+  }
+
+  test "Test de la oblea después de 3 mordiscos"{
+    oblea.recibirMordisco()
+    oblea.recibirMordisco()
+    oblea.recibirMordisco()
+    assert.equals(oblea.peso(), 46.875)
+  }
+
+  test "Test del chocolatin"{
+    chocolatin.peso(80)
+    assert.equals(chocolatin.precio(), 40)
+    assert.equals(chocolatin.peso(), 80)
+    assert.equals(chocolatin.gusto(), chocolate)
+    assert.notThat(chocolatin.esLibreDeGluten())
+  }
+
+  test "Test del chocolatin después de 2 mordiscos"{
+    chocolatin.peso(80)
+    chocolatin.recibirMordisco()
+    chocolatin.recibirMordisco()
+    assert.equals(chocolatin.peso(), 76)
+  }
+
+  test "Test de la pastilla de tutti-frutti libre de gluten"{
+    pastillaTuttiFrutti.esLibreDeGluten(true)
+    assert.equals(pastillaTuttiFrutti.precio(), 7)
+    assert.equals(pastillaTuttiFrutti.peso(), 5)
+    assert.equals(pastillaTuttiFrutti.gusto(), frutilla)
+    assert.that(pastillaTuttiFrutti.esLibreDeGluten())
+  }
+
+  test "Test de la pastilla de tutti-frutti libre de gluten después de 2 mordiscos"{
+    pastillaTuttiFrutti.esLibreDeGluten(true)
+    pastillaTuttiFrutti.recibirMordisco()
+    pastillaTuttiFrutti.recibirMordisco()
+    assert.equals(pastillaTuttiFrutti.gusto(), naranja)
+  }
+
+  
+  test "Test de la pastilla de tutti-frutti NO libre de gluten"{
+    pastillaTuttiFrutti.esLibreDeGluten(false)
+    assert.equals(pastillaTuttiFrutti.peso(), 5)
+    assert.equals(pastillaTuttiFrutti.precio(), 10)
+    assert.equals(pastillaTuttiFrutti.gusto(), frutilla)
+    assert.notThat(pastillaTuttiFrutti.esLibreDeGluten())
+  }
+
+  test "Test de la pastilla de tutti-frutti NO libre de gluten después de 2 mordiscos"{
+    pastillaTuttiFrutti.esLibreDeGluten(false)
+    pastillaTuttiFrutti.recibirMordisco()
+    pastillaTuttiFrutti.recibirMordisco()
+    assert.equals(pastillaTuttiFrutti.gusto(), naranja)
+  }
+
+  test "Test de la pastilla de tutti-frutti libre de gluten bañada"{
+    pastillaTuttiFrutti.esLibreDeGluten(true)
+    golosinaBaniada.golosinaInterior(pastillaTuttiFrutti)
+    assert.equals(golosinaBaniada.precio(), 9)
+    assert.equals(golosinaBaniada.peso(), 9)
+    assert.equals(golosinaBaniada.gusto(), frutilla)
+    assert.that(golosinaBaniada.esLibreDeGluten())
+  }
+
+  test "Test de la pastilla de tutti-frutti libre de gluten bañada después de 2 mordiscos"{
+    pastillaTuttiFrutti.esLibreDeGluten(true)
+    golosinaBaniada.golosinaInterior(pastillaTuttiFrutti)
+    golosinaBaniada.recibirMordisco()
+    golosinaBaniada.recibirMordisco()
+    assert.equals(golosinaBaniada.peso(), 5)
+  }
+
+  test "Test de la pastilla de tutti-frutti NO libre de gluten bañada"{
+    pastillaTuttiFrutti.esLibreDeGluten(false)
+    
+    golosinaBaniada.golosinaInterior(pastillaTuttiFrutti)
+    assert.equals(golosinaBaniada.precio(), 12)
+    assert.equals(golosinaBaniada.peso(), 9)
+    assert.equals(golosinaBaniada.gusto(), frutilla)
+    assert.notThat(golosinaBaniada.esLibreDeGluten())
+  }
+
+  test "Test de la pastilla de tutti-frutti NO libre de gluten bañada después de 2 mordiscos"{
+    pastillaTuttiFrutti.esLibreDeGluten(false)
+    golosinaBaniada.golosinaInterior(pastillaTuttiFrutti)
+    golosinaBaniada.recibirMordisco()
+    golosinaBaniada.recibirMordisco()
+    assert.equals(golosinaBaniada.peso(), 5)
+  }
+
+  test "Test del chocolatin bañado"{
+    chocolatin.peso(80)
+    golosinaBaniada.golosinaInterior(chocolatin)
+    assert.equals(golosinaBaniada.precio(), 42)
+    assert.equals(golosinaBaniada.peso(), 84)
+    assert.equals(golosinaBaniada.gusto(), chocolate)
+    assert.notThat(golosinaBaniada.esLibreDeGluten())
+  }
+
+  test "Test del chocolatin bañado después de 2 mordiscos"{
+    chocolatin.peso(80)
+    golosinaBaniada.golosinaInterior(chocolatin)
+    golosinaBaniada.recibirMordisco()
+    golosinaBaniada.recibirMordisco()
+    assert.equals(golosinaBaniada.peso(), 76)
+  }
+
+  test "Test del chupetin bañado"{
+    golosinaBaniada.golosinaInterior(chupetin)
+    assert.equals(golosinaBaniada.peso(), 11)
+    assert.equals(golosinaBaniada.precio(), 4)
+    assert.equals(golosinaBaniada.gusto(), naranja)
+    assert.that(golosinaBaniada.esLibreDeGluten())
+  }
+
+  test "Test del chupetin bañado después de 2 mordiscos"{
+    golosinaBaniada.golosinaInterior(chupetin)
+    golosinaBaniada.recibirMordisco()
+    golosinaBaniada.recibirMordisco()
+    assert.equals(golosinaBaniada.peso(), 5.67)
+  }
+}
+
+describe "Grupo de tests de Mariano"{
+
+  method initialize(){
+    mariano.comprar(chocolatin)
+    mariano.comprar(caramelo)
+    mariano.comprar(bombon)
+  }
+
+  test "Mariano tiene 3 golosinas"{
+    assert.equals(mariano.cantidadDeGolosinas(), 3)
+  }
+
+  test "Mariano tiene un chocolatin, un caramelo y un bombón"{
+    assert.that(mariano.tieneLaGolosina(chocolatin))
+    assert.that(mariano.tieneLaGolosina(caramelo))
+    assert.that(mariano.tieneLaGolosina(bombon))
+  }
+
+  test "Mariano prueba las golosinas"{
+    mariano.probarGolosinas()
+    //assert.equals()
+  }
+
+  test "Mariano tiene golosina sin TACC"{
+    assert.that(mariano.hayGolosinaSinTACC())
+  }
+
+  test "Mariano tiene golosinas con precios cuidados"{
+    assert.that(mariano.preciosCuidados())
+  }
+
+  test "Primer golosina de chocolate de Mariano"{
+    assert.equals(mariano.golosinaDeSabor(chocolate), chocolatin)
+  }
+
+  test "Las golosinas de chocolate de Mariano"{
+    assert.equals(mariano.golosinasDeSabor(chocolate), [chocolatin, bombon])
+  }
+
+  test "Sabores de las golosinas de Mariano"{
+    assert.equals(mariano.sabores(), [chocolate, frutilla])
+  }
+
+  test "La golosina más cara que compro Mariano"{
+    assert.equals(mariano.golosinaMasCara(), caramelo)
+  }
+
+  test "El peso total de las golosinas de Mariano"{
+    assert.equals(mariano.pesoGolosinas(), 17)
   }
 
 }
